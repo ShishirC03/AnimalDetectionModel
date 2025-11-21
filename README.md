@@ -1,58 +1,51 @@
-🧠 AI Model Description (YOLO Animal Detector)
+# 🧠 SmartFarm AI Model – YOLO Animal Detector
 
-SmartFarm uses a YOLO-based object detection model to identify common farm-intruding animals in real time. The model is optimized for mobile camera frames sent to the backend.
+This directory contains the **YOLO-based object detection model** used in the SmartFarm system to identify common farm-intruding animals in real time.  
+The model is optimized for **mobile camera frames** and performs efficiently on CPU-based environments.
 
-🔍 What the Model Detects
+---
 
-The model is trained/fine-tuned to detect these animals:
+## 🔍 What the Model Detects
 
-Monkey
+The model is trained/fine-tuned to detect the following intruding animals commonly found in Indian farmlands:
 
-Goat
+- 🐒 **Monkey**
+- 🐐 **Goat**
+- 🐄 **Cow**
+- 🦌 **Nilgai**
+- 🐗 **Wild Boar**
 
-Cow
+These five classes represent the majority of crop-damaging animal incidents across agricultural regions.
 
-Nilgai
+---
 
-Wild Boar
+## ⚡ How the Model Works
 
-These reflect the most frequent intruders in Indian farmlands.
+1. The mobile device captures a frame from the live camera feed.  
+2. The frame is sent to the backend, which forwards it to the AI model.  
+3. The YOLO model performs inference and returns:
+   - **Predicted animal label**
+   - **Confidence score**
+   - **Bounding box** (`x`, `y`, `width`, `height`)
+4. The backend uses the results to trigger real-time alerts in the app.
 
-⚡ How It Works
+---
 
-Mobile app captures a frame
+## 🚀 Why YOLO?
 
-Frame is sent to the Node.js backend
+- ⚡ **Real-time performance**  
+- 🎯 **High accuracy** for small & large animal detection  
+- 💻 **Runs on CPU** (no GPU required)  
+- 🔧 **Easy to retrain** for additional animals  
+- 📱 **Optimized for mobile-captured frames**
 
-Backend forwards the image to the YOLO AI model server (FastAPI)
+---
 
-Model returns:
+## 📤 Example Model Output (JSON)
 
-animal label
-
-confidence score
-
-bounding box
-
-Backend saves the detection and sends a real-time alert to the app via Socket.IO
-
-🚀 Why YOLO?
-
-Very fast (real-time inference)
-
-Accurate on small + large animals
-
-Lightweight enough to run on CPU
-
-Easy to retrain for custom animals
-
-📦 Output Example
+```json
 {
   "label": "Monkey",
   "confidence": 0.87,
   "box": { "x": 120, "y": 60, "w": 200, "h": 260 }
 }
-
-🎯 Purpose
-
-To instantly detect dangerous or crop-damaging animals and notify farmers through the app’s alert system.
